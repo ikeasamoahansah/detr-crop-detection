@@ -8,10 +8,11 @@ DIR_TRAIN = "/content/dataset/images"
 
 
 class CropDataset(Dataset):
-    def __init__(self, image_ids, dataframe, transforms=None):
+    def __init__(self, image_ids, dataframe, class_map, transforms=None):
         self.image_ids = image_ids
         self.df = dataframe
         self.transforms = transforms
+        self.class_map = class_map
 
     def __len__(self) -> int:
         return self.image_ids.shape[0]
@@ -30,11 +31,13 @@ class CropDataset(Dataset):
         # Area of bb
         area = self.df["area"]
 
-        # AS pointed out by PRVI It works better if the main class is labelled as zero
-        labels = np.zeros(len(boxes), dtype=np.int32)
+        labels = [
+            self.class_map.inverse(class_name)
+            for class_name in self.df["class"].tolist()
+        ]
 
         if self.transforms:
-            sample = {"image": image, "bboxes": boxes, "labels": labels}
+            sample = {"image": image, "bboxes": boxes, "labels": torch.tensor(labels)}
             sample = self.transforms(**sample)
             image = sample["image"]
             boxes = sample["bboxes"]

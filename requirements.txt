@@ -2,6 +2,9 @@ albumentations
 cv2
 glob
 matplotlib
+pandas
+scikit-learn
 torch
 torchvision
 tqdm
+

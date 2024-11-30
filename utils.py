@@ -79,9 +79,10 @@ def convert_to_detr(df):
     df["y"] = df["ymin"] + df["h"] / 2
     df["area"] = df["w"] * df["h"]
     df.drop(columns=["xmin", "ymin", "xmax", "ymax"], inplace=True)
+    return df
 
 
-def convert_to_pascal_voc(results):
+def convert_to_xy(results):
     for result in results:
         boxes = result["boxes"]
 
