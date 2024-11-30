@@ -4,7 +4,7 @@ import cv2
 import albumentations as A
 from torch.utils.data import Dataset
 
-DIR_TRAIN = "/content/dataset/images"
+DIR_TRAIN = "/content/dataset/images/train"
 
 
 class CropDataset(Dataset):
