@@ -7,8 +7,8 @@ import pandas as pd
 from .dataset import CropDataset
 from .model import DETRModel
 from torch.utils.data import DataLoader
-from .detr.models.matcher import HungarianMatcher
-from .detr.models.detr import SetCriterion
+from detr.models.matcher import HungarianMatcher
+from detr.models.detr import SetCriterion
 from .utils import convert_to_detr 
 from sklearn.model_selection import StratifiedKFold
 
